@@ -1,0 +1,53 @@
+var http = require('http');
+var url = require('url');
+var fs = require('fs');
+
+var EventEmitter = require('events').EventEmitter;
+var util = require('util');
+
+var Downloader = new EventEmitter();
+
+Downloader.download = function( theUrl, outputDir, maxFileSize ) {
+
+	var that = this;
+
+	var options = {
+		host: url.parse(theUrl).hostname,
+		port: 80,
+		path: url.parse(theUrl).pathname
+	};
+
+	var filename = options.path.split("/").pop();
+	var maxFileSize = maxFileSize || 1000000000; // default to 100MB
+
+	var dlrequest = http.get(options, function(res) {
+		if(res.statusCode === 200) {
+			var filesize = res.headers['content-length'];
+			if(filesize <= maxFileSize) {
+				var downloadfile = fs.createWriteStream( outputDir + filename, {
+					flags: 'a',
+					encoding: 'binary'
+				});
+
+				res.on('error', function(err) {
+					that.emit('error', '[FILE DOWNLOAD ERROR - DATA] ' + err);
+				});
+				res.on('data', function(chunk) {
+					downloadfile.write(chunk);
+				});
+				res.on('end', function() {
+					downloadfile.end();
+					that.emit('done', outputDir + filename );
+				});
+			} else {
+				that.emit('error', '[REQUEST FAILED] file size > ' + maxFileSize + ' bytes. File size = ' + filesize);
+			}
+		} else {
+			that.emit('error', '[REQUEST FAILED] ' + res.statusCode + ' PATH ' + options.path);
+		}
+	});
+}
+
+util.inherits(Downloader, EventEmitter);
+
+exports.Downloader = Downloader;
