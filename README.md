@@ -1,10 +1,9 @@
 
-Downloader
-==========
+# Downloader
+
 Node.js event driven downloader.
 
-Usage
-=====
+# Usage
 
 var dl = require('./downloader');
 
@@ -29,7 +28,7 @@ for(i=0; i < urls.length; i++) {
 }
 
 
-License
-========
+# License
+
 @2012 Hendrix Tavarez
 MIT License http://www.opensource.org/licenses/MIT 
