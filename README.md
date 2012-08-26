@@ -5,6 +5,7 @@ Node.js event driven downloader.
 
 # Usage
 
+    | 
 var dl = require('./downloader');
 
 var downloadDir = __dirname + '/downloads/';
@@ -27,6 +28,7 @@ for(i=0; i < urls.length; i++) {
 	downloader.download( urls[i], downloadDir);
 }
 
+$
 
 # License
 
