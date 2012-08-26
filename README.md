@@ -3,6 +3,8 @@ Downloader
 ==========
 Node.js event driven downloader.
 
+Usage
+=====
 
 var dl = require('./downloader');
 
@@ -23,7 +25,6 @@ downloader.on('error', function(msg) {
 });
 
 for(i=0; i < urls.length; i++) {
-
 	downloader.download( urls[i], downloadDir);
 }
 
