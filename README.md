@@ -3,6 +3,10 @@
 
 Node.js event driven downloader.
 
+# Install
+
+    npm install downloader
+
 # Usage
 
     var downloader = require('./lib/downloader');
