@@ -1,5 +1,5 @@
 
-# Downloader
+# HTTP Downloader
 
 Node.js event driven downloader.
 
