@@ -9,7 +9,7 @@ Node.js event driven downloader.
 
 # Usage
 
-    var downloader = require('./lib/downloader');
+    var downloader = require('downloader');
     
     var downloadDir = __dirname + '/downloads/';
     
